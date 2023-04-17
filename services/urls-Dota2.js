@@ -1,5 +1,6 @@
 const dataHeros = require('./dataHeros.dota2.json')
 const detailHeros = require('./herosDetail')
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args)) // Solucion para importar nodefetch solo con require
 
 // RETORNA TODOS LOS PERSONAJES EN LISTA DE HEROES(la lista esta definida en el mismo servidor, pero se podria pedir mediante un fetch a la api que lo posee.)
 const getDataDota2Api = (request, response, next) => {
@@ -21,7 +22,7 @@ const getApiExternaDataHeros = (req, res) => {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': 'miapikey',
+      'X-RapidAPI-Key': 'miapikey', // se requiere apikey para acceder a todos los datos, sino hay datos para probar en herosDetail.js
       'X-RapidAPI-Host': 'dota2-heroes.p.rapidapi.com'
     }
   }
