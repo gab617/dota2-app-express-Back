@@ -6,7 +6,7 @@ const logger = require('./loggerMiddleware')
 const { getDataDota2Api, getHeroDataApi } = require('./services/urls-Dota2')
 
 const app = express()// se declara app con servidor express
-app.use(cors()) // por defecto cualquier origen funciona en nuestra api
+app.use(cors({ origin: true }))// por defecto cualquier origen funciona en nuestra api
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())// soluciona temas de parseo para comunicacion servior-cliente
 app.use(logger)// al usar USE, sin definir un path especifico para analizar, todos los paths pasaran en logger.
@@ -64,7 +64,7 @@ app.use((request, response) => {
   })
 })
 
-const PORT = 3001
-app.listen(PORT, () => {
-  console.log(`Server on port ${PORT}`) // mensaje en consola luego de levantar el servidor
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+  console.log(`Server on port ${port}`) // mensaje en consola luego de levantar el servidor
 })
