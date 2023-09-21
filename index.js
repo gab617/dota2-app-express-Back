@@ -3,7 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const logger = require('./loggerMiddleware')
 
-const { getDataDota2Api, getHeroDataApi } = require('./services/urls-Dota2')
+const { getDataDota2Api, getHeroDataApi, getPing } = require('./services/urls-Dota2')
 
 const app = express()// se declara app con servidor express
 app.use(cors({ origin: true }))// por defecto cualquier origen funciona en nuestra api
@@ -16,6 +16,9 @@ app.use(logger)// al usar USE, sin definir un path especifico para analizar, tod
     response.end(JSON.stringify(tasks))
 })
  */
+/* Si hago un ping ni bien abierto el portfolio donde esta la url de mi aplicacion, activa el
+servidor ni bien entrado en el protfolio? */
+app.get('/api/ping', getPing)
 
 // Desde services, en un json ya definido con los datos de lo heroes, se envia mediante la funcion getDataDota2Api
 // getDataDota2Api, se envia al front, los datos del json con el que va a renderizar su contenido.

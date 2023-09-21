@@ -1,8 +1,13 @@
 const dataHeros = require('./dataHeros.dota2.json')
 const fs = require('fs') // lector de archivos
+// eslint-disable-next-line no-unused-vars
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args)) // Solucion para importar nodefetch solo con require
 const dataHerosDetail = fs.readFileSync('./services/herosDetail.json', 'utf-8')
 const jsonDetails = JSON.parse(dataHerosDetail)
+
+const getPing = (request, response) => {
+  response.status(200).send('ping Dota2 App')
+}
 
 // RETORNA TODOS LOS PERSONAJES EN LISTA DE HEROES(la lista esta definida en el mismo servidor, pero se podria pedir mediante un fetch a la api que lo posee.)
 const getDataDota2Api = (request, response, next) => {
@@ -24,7 +29,7 @@ const getHeroDataApi = (request, response, next) => { // si no se encuentra ya g
 }
 
 // Ya tome todos los datos actuales.
-const getApiExternaDataHeros = (req, res) => { 
+const getApiExternaDataHeros = (req, res) => {
 /*   const id = +req.params.id
   console.log(id, 'Solicitado desde front')
   const url = `https://dota2-heroes.p.rapidapi.com/heroes/english/${id}`
@@ -49,5 +54,6 @@ const getApiExternaDataHeros = (req, res) => {
 module.exports = {
   getDataDota2Api,
   getHeroDataApi,
+  getPing,
   getApiExternaDataHeros
 }
